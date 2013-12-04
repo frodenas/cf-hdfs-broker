@@ -1,0 +1,43 @@
+# This file should not be used in deployed environments. Instead, set
+# the SETTINGS_PATH environment variable to point to a configuration
+# file that contains these settings.
+
+defaults: &defaults
+  log_path: 'log/<%= Rails.env %>.log'
+  auth_username: cc
+  dfs_host: 1.2.3.4
+  dfs_port: 50070
+  dfs_user: root
+  dfs_path_prefix: '/user/cf_'
+  dfs_permission: 770
+
+  services:
+    - name: hdfs
+      id: cfafb37a-412a-4d17-9d6f-a8c16acc092d
+      description: HDFS service for application development and testing
+      tags:
+        - hdfs
+        - hadoop
+      metadata:
+        provider:
+          name:
+        listing:
+          imageUrl: ~
+          blurb: HDFS service for application development and testing
+      plans:
+        - name: unlimited
+          id: 0edccfb6-27c3-4204-b7a4-341b6fd3ec0b
+          description: Shared HDFS Cluster, Unlimited storage
+          metadata:
+            cost: 0.0
+            bullets:
+              - content: Shared HDFS Cluster
+              - content: Unlimited storage
+
+development:
+  auth_password: 'c1oudc0w'
+  <<: *defaults
+
+test:
+  auth_password: 'c1oudc0w'
+  <<: *defaults
